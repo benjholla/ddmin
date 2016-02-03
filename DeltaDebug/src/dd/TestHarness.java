@@ -1,4 +1,4 @@
-package ddmin;
+package dd;
 
 import java.util.List;
 
