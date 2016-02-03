@@ -1,4 +1,4 @@
-package dd.example;
+package dd.examples;
 
 import java.io.BufferedReader;
 import java.io.File;

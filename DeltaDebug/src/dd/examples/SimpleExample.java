@@ -1,4 +1,4 @@
-package dd.example;
+package dd.examples;
 
 import java.util.LinkedList;
 import java.util.List;
