@@ -31,7 +31,7 @@ public class DeltaDebug {
 			
 			for(List<E> subset : subsets){
 				List<E> complement = difference(input, subset);
-				if (harness.run(complement) == false) {
+				if (harness.run(complement) == TestHarness.FAIL) {
 					input = complement;
 					n = Math.max(n - 1, 2);
 					complementFailing = true;

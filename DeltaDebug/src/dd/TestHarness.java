@@ -8,14 +8,18 @@ import java.util.List;
  * 
  * @author Ben Holland
  */
-public interface TestHarness<E> {
+public abstract class TestHarness<E> {
 
+	public static final int PASS = 1;
+	public static final int UNRESOLVED = 0;
+	public static final int FAIL = -1;
+	
 	/**
 	 * Returns true if the test passes and false if the test fails
 	 * @param <E>
 	 * @param complement
 	 * @return
 	 */
-	public boolean run(List<E> input);
+	public abstract int run(List<E> input);
 
 }

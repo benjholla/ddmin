@@ -1,22 +1,25 @@
-package dd;
+package dd.example;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import dd.DeltaDebug;
+import dd.TestHarness;
+
 /**
- * An example uses of the ddmin algorithm
+ * An example use of the ddmin algorithm
  * 
  * @author Ben Holland
  */
-public class Test {
+public class SimpleExample {
 
 	private static TestHarness<Integer> harness = new TestHarness<Integer>(){
 		@Override
-		public boolean run(List<Integer> input) {
+		public int run(List<Integer> input) {
 			if (input.contains(1) && input.contains(3)){
-				return false; // fail if the input contains 1 and 3
+				return FAIL; // fail if the input contains 1 and 3
 			}
-			return true;
+			return PASS;
 		}
 	};
 	
