@@ -36,3 +36,8 @@ The result is the minimized set `[1,3]`.
 Chunking is how we define each element in the input set we pass to the ddmin algorithm.  For example if we had an input XML file that crashes an XML parser we could chunk the input into a set of elements by considering each character as an element, but we might be able to be a bit more efficient by considering some of the semantics of XML and chunking based on XML structure. This implementation of ddmin uses Java generics so you can define chunking however you want.
 
 The included `XMLParserExample` class shows how this implementation could be adapted to exercise an XML parser that contains a bug when parsing a certain kind of URL.  The *Why Programs Fail* book contains [an exercise](http://www.whyprogramsfail.com/project1.php) to reduce an XML file containing the error triggering input to a reduced input that still triggers the bug.  The buggy parser and test input can be downloaded [here](https://www.st.cs.uni-saarland.de/whyprogramsfail/code/xmlproc-0.70a.zip).
+
+# Interactive Demo
+The interactive demo can be launched by double clicking on the `demo.jar` file or running `java -jar demo.jar` from the command line.
+
+![Interactive Demo](./demo.png)
