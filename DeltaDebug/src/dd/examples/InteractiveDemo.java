@@ -277,7 +277,7 @@ public class InteractiveDemo extends JFrame {
 					
 					int test = harness.run(complement);
 					
-					outputTextArea.append("test(" + input.toString().replace("[", "").replace("]", "") + ")=");
+					outputTextArea.append("test(" + complement.toString().replace("[", "").replace("]", "") + ")=");
 					if(test == TestHarness.PASS){
 						outputTextArea.setText(outputTextArea.getText() + "PASS\n");
 					} else if(test == TestHarness.FAIL){
