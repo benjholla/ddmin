@@ -11,11 +11,11 @@ The `TestHarness` interface contains a method `run`, which should be implemented
 	
 		private static TestHarness<Integer> harness = new TestHarness<Integer>(){
 			@Override
-			public boolean run(List<Integer> input) {
+			public int run(List<Integer> input) {
 				if (input.contains(1) && input.contains(3)){
-					return false; // fail if the input contains 1 and 3
+					return FAIL; // fail if the input contains 1 and 3
 				}
-				return true;
+				return PASS;
 			}
 		};
 		
