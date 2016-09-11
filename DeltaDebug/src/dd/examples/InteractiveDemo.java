@@ -216,29 +216,37 @@ public class InteractiveDemo extends JFrame {
 				
 				// get the error constraint set
 				String constraintString = errorConstraintsTextArea.getText();
-				constraintString = constraintString.replace(" ", "");
-				String[] errors = constraintString.split(",");
-				final LinkedList<Integer> constraints = new LinkedList<Integer>();
-				HashSet<Integer> constraintSet = new HashSet<Integer>();
-				try {
-					for(String inputElement : errors){
-						constraints.add(Integer.parseInt(inputElement));
-						constraintSet.add(Integer.parseInt(inputElement));
+				constraintString = constraintString.replace(" ", "").trim();
+				
+				final LinkedList<LinkedList<Integer>> constraintSets = new LinkedList<LinkedList<Integer>>();
+				String[] functions = constraintString.split("\n");
+				for(String function : functions){
+					String[] errors = function.split(",");
+					final LinkedList<Integer> constraints = new LinkedList<Integer>();
+					HashSet<Integer> constraintSet = new HashSet<Integer>();
+					try {
+						for(String inputElement : errors){
+							constraints.add(Integer.parseInt(inputElement));
+							constraintSet.add(Integer.parseInt(inputElement));
+						}
+						if(constraints.size() != constraintSet.size()){
+							throw new Exception("Set (" + function + ") should not contain duplicates!");
+						}
+					} catch (Exception ex){
+						JOptionPane.showMessageDialog(new JFrame(), "Invalid error constraint set (" + function + "). Error: " + ex.getMessage());
+						return;
 					}
-					if(constraints.size() != constraintSet.size()){
-						throw new Exception("Set should not contain duplicates!");
-					}
-				} catch (Exception ex){
-					JOptionPane.showMessageDialog(new JFrame(), "Invalid error constraint set. Error: " + ex.getMessage());
-					return;
+					constraintSets.add(constraints);
 				}
 				
 				// create the test harness from the error constraints
 				TestHarness<Integer> harness = new TestHarness<Integer>(){
 					@Override
 					public int run(List<Integer> input) {
-						if (input.containsAll(constraints)){
-							return FAIL; 
+						for(LinkedList<Integer> constraints : constraintSets){
+							if (input.containsAll(constraints)){
+								return FAIL; 
+							}
 						}
 						return PASS;
 					}

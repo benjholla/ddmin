@@ -40,4 +40,4 @@ The included `XMLParserExample` class shows how this implementation could be ada
 # Interactive Demo
 The interactive demo can be launched by double clicking on the `demo.jar` file or running `java -jar demo.jar` from the command line.
 
-![Interactive Demo](./demo.png)
+![Interactive Demo](./screenshot.png)
