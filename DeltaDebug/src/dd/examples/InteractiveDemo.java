@@ -22,6 +22,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
 import dd.TestHarness;
+import javax.swing.JCheckBox;
 
 public class InteractiveDemo extends JFrame {
 
@@ -156,15 +157,23 @@ public class InteractiveDemo extends JFrame {
 		inputPanel.add(controlPanel, gbc_controlPanel);
 		GridBagLayout gbl_controlPanel = new GridBagLayout();
 		gbl_controlPanel.columnWidths = new int[]{0, 0};
-		gbl_controlPanel.rowHeights = new int[]{0, 0};
+		gbl_controlPanel.rowHeights = new int[]{0, 0, 0};
 		gbl_controlPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_controlPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_controlPanel.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		controlPanel.setLayout(gbl_controlPanel);
 		
-		JButton runButton = new JButton("Run");
+		final JCheckBox includeErrorConstraintSupersets = new JCheckBox("Include Constraint Supersets");
+		GridBagConstraints gbc_chckbxIncludeErrorConstraint = new GridBagConstraints();
+		gbc_chckbxIncludeErrorConstraint.anchor = GridBagConstraints.NORTH;
+		gbc_chckbxIncludeErrorConstraint.insets = new Insets(0, 0, 5, 0);
+		gbc_chckbxIncludeErrorConstraint.gridx = 0;
+		gbc_chckbxIncludeErrorConstraint.gridy = 0;
+		controlPanel.add(includeErrorConstraintSupersets, gbc_chckbxIncludeErrorConstraint);
+		
+		JButton runButton = new JButton("Run DDMIN");
 		GridBagConstraints gbc_runButton = new GridBagConstraints();
 		gbc_runButton.gridx = 0;
-		gbc_runButton.gridy = 0;
+		gbc_runButton.gridy = 1;
 		controlPanel.add(runButton, gbc_runButton);
 		
 		JPanel outputPanel = new JPanel();
@@ -244,8 +253,16 @@ public class InteractiveDemo extends JFrame {
 					@Override
 					public int run(List<Integer> input) {
 						for(LinkedList<Integer> constraints : constraintSets){
-							if (input.containsAll(constraints)){
-								return FAIL; 
+							boolean checkEqual = input.containsAll(constraints) && (input.size() == constraints.size());
+							boolean checkSupersets = input.containsAll(constraints);
+							if(includeErrorConstraintSupersets.isSelected()){
+								if (checkSupersets){
+									return FAIL; 
+								}
+							} else {
+								if (checkEqual){
+									return FAIL; 
+								}
 							}
 						}
 						return PASS;
